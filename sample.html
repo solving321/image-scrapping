@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Gallery</title>
+</head>
+<body>
+  <div id="imageGallery"></div>
+
+  <script>
+    function createImageElement(imageInfo) {
+      const img = document.createElement('img');
+      img.src = `./actual_images_second/${imageInfo.filename}`;
+      img.alt = imageInfo.filename;
+      img.style.height = `${imageInfo.height}px`;
+      img.style.width = `${imageInfo.width}px`;
+
+      const gallery = document.getElementById('imageGallery');
+      gallery.appendChild(img);
+    }
+
+    fetch('./images_detail_second.json')
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(image => {
+          createImageElement(image);
+        });
+      })
+      .catch(error => console.error('Error fetching image data:', error));
+  </script>
+</body>
+</html>
